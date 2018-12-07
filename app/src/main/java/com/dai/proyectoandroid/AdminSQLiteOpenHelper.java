@@ -20,14 +20,11 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL("create table univ(idUniv integer primary key, nombre text, estado text) ");
         sqLiteDatabase.execSQL("create table carrera(idCar integer primary key , nombre text, creds integer)");
-        sqLiteDatabase.execSQL("create table alumno(cu integer primary key, nombre text, idCar int references carrera, idUniv integer references univ) ");
+        sqLiteDatabase.execSQL("create table alumno(cu integer primary key, nombre text, idCar integer references carrera, idUniv integer references univ) ");
     }
 
-    //Este método se usa si se incrementa la versión de la BD en el código de la aplicación.
-    //Una política al actualizar puede ser el borrar la BD anterior, para iniciar desde cero la nueva.
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("drop table if exists alumnos");
-        sqLiteDatabase.execSQL("create table alumnos(cu integer primary key, nombre text, carrera text, universidad integer)");
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
     }
 }

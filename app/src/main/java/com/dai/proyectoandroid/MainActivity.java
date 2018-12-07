@@ -30,4 +30,8 @@ public class MainActivity extends AppCompatActivity {
         Intent iPantallaCarrera = new Intent(this, ActividadCarrera.class);
         startActivity(iPantallaCarrera);
     }
+    public void pantallaUniversidad(View v){
+        Intent iPantallaUniv = new Intent(this, ActividadUniversidad.class);
+        startActivity(iPantallaUniv);
+    }
 }

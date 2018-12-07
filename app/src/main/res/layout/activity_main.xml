@@ -29,4 +29,14 @@
         android:layout_marginTop="111dp"
         android:onClick="pantallaCarrera"
         android:text="Carrera" />
+
+    <Button
+        android:id="@+id/button13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="197dp"
+        android:onClick="pantallaUniversidad"
+        android:text="Universidad" />
 </RelativeLayout>
