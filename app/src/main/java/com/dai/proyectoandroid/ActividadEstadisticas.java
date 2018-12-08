@@ -29,12 +29,13 @@ public class ActividadEstadisticas extends AppCompatActivity {
     }
 
     public void buscaUniversidades(View v){
-        String estado=et1.getText().toString();
-        Cursor fila=bd.rawQuery("select * from univ where estado="+estado, null);
+        //toma un string del edit text
+        String est=et1.getText().toString();
+        Cursor fila=bd.rawQuery("select * from univ where estado = '"+est+"'", null);
         String resp="Las universidades de ese estado son: ";
         int fin;
 
-        if(fila.moveToFirst()){
+        if(fila.getCount() > 0 && fila.moveToFirst()){
             fin=fila.getCount();
             for ( int i=0;i<fin-1;i++ ){
                 fila.move(i);
@@ -46,7 +47,7 @@ public class ActividadEstadisticas extends AppCompatActivity {
             tw1.setText(resp.toString());
         }
         else{
-            if(estado==""){
+            if(est==""){
                 Toast.makeText(this, "Favor de escribir un estado",Toast.LENGTH_LONG).show();
             }
             else{
@@ -54,10 +55,9 @@ public class ActividadEstadisticas extends AppCompatActivity {
             }
         }
     }
-
     public void buscarCarreras(View v){
         String carrera =et1.getText().toString();
-        Cursor fila=bd.rawQuery("select * from universidad where idUniv not in(select idUniv from alumno where idCar in(select idCar from carrera where nombre ="+ carrera+"))",null);
+        Cursor fila=bd.rawQuery("select * from univ where idUniv not in(select idUniv from alumno where idCar in(select idCar from carrera where nombre ='"+ carrera+"'))",null);
         String resp= "Las carrera no es impartida por las universidades: ";
         int fin;
 
@@ -83,7 +83,7 @@ public class ActividadEstadisticas extends AppCompatActivity {
     }
     public void totalCarreras(View v){
         String universidad=et1.getText().toString();
-        Cursor fila=bd.rawQuery("select* from carrera where idCar in(select idCar from alumno where idUniv in(select idUniv from univ where nombre="+universidad +"))",null);
+        Cursor fila=bd.rawQuery("select * from carrera where idCar in(select idCar from alumno where idUniv in(select idUniv from univ where nombre='"+universidad +"'))",null);
         String resp="El numero de carrareras que imparte esa universidad es ";
 
         if(universidad !=""){
@@ -97,7 +97,8 @@ public class ActividadEstadisticas extends AppCompatActivity {
     }
 
     public void topNumAlumnos(View v){
-        Cursor fila=bd.rawQuery("select * from univ where idUniv in(select top 3 idUniv from alumno group by idUniv order by count(idUniv) desc)",null);
+        Cursor f2 = bd.rawQuery("select * from alumno where cu > 0", null);
+        Cursor fila=bd.rawQuery("select nombre from univ where idUniv in(select idUniv alumnos from alumno group by idUniv order by count(cu) desc limit 3 )",null);
         String resp= "Las 3 universidades con mayor numero de alumnos son: ";
 
         for(int i=0; i<2; i++){
