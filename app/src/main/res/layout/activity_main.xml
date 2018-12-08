@@ -36,7 +36,19 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/button2"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="197dp"
+        android:layout_marginTop="191dp"
+        android:layout_marginEnd="-6dp"
         android:onClick="pantallaUniversidad"
         android:text="Universidad" />
+
+    <Button
+        android:id="@+id/button14"
+        android:layout_width="152dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-39dp"
+        android:layout_marginBottom="184dp"
+        android:onClick="pantallaEstadisticas"
+        android:text="Estadisticas" />
 </RelativeLayout>

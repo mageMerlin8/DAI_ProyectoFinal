@@ -1,6 +1,7 @@
 package com.dai.proyectoandroid;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -59,6 +60,14 @@ public class ActividadUniversidad extends AppCompatActivity {
         catch (SQLException err) {
             Toast.makeText(this, "Error: "+err.getMessage(), Toast.LENGTH_LONG).show(); //Se avisa al usuario que la inserción falló
         }
+    }
+
+    /*
+    Metodo para regresar a la pantalla principal
+    */
+    public void pantallaInicio(View v){
+        Intent iPantallaInicio = new Intent(this, MainActivity.class);
+        startActivity(iPantallaInicio);
     }
 
     // Método para modificar los datos de una Universidad que ya está en la BD

@@ -60,7 +60,7 @@ public class ActividadAlumno extends AppCompatActivity {
     /**
      * Da de alta un alumno en la tabla respectiva.
      */
-    public void alta(View v) {
+    public void altaAl(View v) {
 
         //Obtiene los datos tecleados.
         String cu= etClave.getText().toString();
@@ -72,13 +72,13 @@ public class ActividadAlumno extends AppCompatActivity {
         ContentValues reg= new ContentValues();
         reg.put("cu", cu);
         reg.put("nombre", nombre);
-        reg.put("carrera", carr);
-        reg.put("universidad", univ);
+        reg.put("idCar", carr);
+        reg.put("idUniv", univ);
 
         //Hace la inserción de los datos en la tabla.
         try {
             if (bd != null) {
-                long resul= bd.insert("alumnos", null, reg);
+                long resul= bd.insert("alumno", null, reg);
                 Toast.makeText(this, "Se insertó en alumnos", Toast.LENGTH_LONG).show();
                 limpia(v);
             }
@@ -93,14 +93,14 @@ public class ActividadAlumno extends AppCompatActivity {
     /**
      * Consulta a SQLite.
      */
-    public void consulta(View v) {
+    public void consultaAl(View v) {
 
         //Obtiene la clave única del alumno.
         String cu= etClave.getText().toString();
 
         //Ejecuta la consulta.
-        Cursor fila= bd.rawQuery("select * from alumnos where cu=" +
-                cu, null);
+        Cursor fila= bd.rawQuery("select * from alumno where cu=" +
+                cu + " ", null);
 
         //Recorre el cursor para acceder al resultado de la consulta.
         if (fila.moveToFirst()) {
@@ -118,13 +118,13 @@ public class ActividadAlumno extends AppCompatActivity {
     /**
      * Da de baja al alumno cuyo clave única se especificó en la caja de texto.
      */
-    public void baja(View v) {
+    public void bajaAl(View v) {
 
         //Se lee la clave única del alumno a dar de baja de la BD.
         String cu = etClave.getText().toString();
 
         //Se ejecuta la baja.
-        int cant = bd.delete("alumnos", "cu=" + cu, null);
+        int cant = bd.delete("alumno", "cu=" + cu, null);
 
         //Se limpian las cajas de texto.
         limpia(v);
@@ -140,7 +140,7 @@ public class ActividadAlumno extends AppCompatActivity {
     /**
      * Modifica el nombre, la carrera o la univ. del alumno dado por su clave.
      */
-    public void modificacion(View v) {
+    public void modificacionAl(View v) {
 
         //Toma el contenido de las cajas de texto.
         String cu = etClave.getText().toString();
@@ -151,11 +151,11 @@ public class ActividadAlumno extends AppCompatActivity {
         //Se reunen los datos como un conjunto.
         ContentValues registro = new ContentValues();
         registro.put("nombre", nombre);
-        registro.put("carrera", carrera);
-        registro.put("universidad", universidad);
+        registro.put("idCar", carrera);
+        registro.put("idUniv", universidad);
 
         //Se hace la actualización en la BD.
-        int cant = bd.update("alumnos", registro, "cu=" +  cu, null);
+        int cant = bd.update("alumno", registro, "cu=" +  cu, null);
 
         if (cant == 1)
             Toast.makeText(this, "Se modificaron los datos del alumno",

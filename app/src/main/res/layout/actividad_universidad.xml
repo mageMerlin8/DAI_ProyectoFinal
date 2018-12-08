@@ -104,10 +104,22 @@
         android:id="@+id/button4"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/nomU"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="14dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginBottom="20dp"
         android:onClick="limpia"
         android:text="Limpiar pantalla" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button4"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="1dp"
+        android:onClick="pantallaInicio"
+        android:text="Inicio" />
 
 </RelativeLayout>

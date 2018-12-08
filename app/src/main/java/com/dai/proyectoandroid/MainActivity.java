@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         Intent iPantallaUniv = new Intent(this, ActividadUniversidad.class);
         startActivity(iPantallaUniv);
     }
+    public void pantallaEstadisticas(View v){
+        Intent iPantallaEst = new Intent(this, ActividadEstadisticas.class);
+        startActivity(iPantallaEst);
+    }
+
 }
