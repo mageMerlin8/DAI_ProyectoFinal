@@ -110,4 +110,11 @@ public class ActividadEstadisticas extends AppCompatActivity {
         tw1.setVisibility(View.VISIBLE);
         tw1.setText(resp.toString());
     }
+    /*
+    Metodo para regresar a la pantalla principal
+    */
+    public void pantallaInicioEs(View v){
+        Intent iPantallaInicio = new Intent(this, MainActivity.class);
+        startActivity(iPantallaInicio);
+    }
 }
