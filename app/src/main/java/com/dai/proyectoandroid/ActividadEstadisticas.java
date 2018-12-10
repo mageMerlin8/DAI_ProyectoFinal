@@ -31,7 +31,10 @@ public class ActividadEstadisticas extends AppCompatActivity {
     public void buscaUniversidades(View v){
         //toma un string del edit text
         String est=et1.getText().toString();
+
+        //hace la consulta de la base de datos
         Cursor fila=bd.rawQuery("select * from univ where estado = '"+est+"'", null);
+
         String resp="Las universidades de ese estado son: ";
         int fin;
 
@@ -97,16 +100,13 @@ public class ActividadEstadisticas extends AppCompatActivity {
     }
 
     public void topNumAlumnos(View v){
-        Cursor f2 = bd.rawQuery("select * from alumno where cu > 0", null);
         Cursor fila=bd.rawQuery("select nombre from univ where idUniv in(select idUniv alumnos from alumno group by idUniv order by count(cu) desc limit 3 )",null);
-        String resp= "Las 3 universidades con mayor numero de alumnos son: ";
-
-        for(int i=0; i<2; i++){
-            fila.move(i);
-            resp=resp+fila.getString(1)+" ,";
-        }
-        fila.moveToLast();
-        resp=resp+fila.getString(1)+".";
+        String resp= "Las 3 universidades con mayor numero de alumnos son: " + fila.getCount();
+        if(fila.moveToFirst())
+            for(int i=0; i<fila.getCount() && i<2; i++){
+                resp=resp+fila.getString(0)+" ,";
+                fila.moveToNext();
+            }
         tw1.setVisibility(View.VISIBLE);
         tw1.setText(resp.toString());
     }
